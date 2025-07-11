@@ -16,6 +16,8 @@ By adding anothers two points, we can calculate a smoother curve by doing the Le
 
 ![image](imagens/image.png)
 
+This method is expensive. There are other ways to do that, like Catmull-Rom, uniform, etc.
+
 ---
 
 ### Continuity
