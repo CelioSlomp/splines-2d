@@ -1,5 +1,5 @@
 # Arquivos a serem compilados
-OBJS = main.cpp src/ponto.cpp
+OBJS = main.cpp src/point.cpp src/spline.cpp src/render.cpp
 
 # Compilador
 CC = g++
@@ -7,7 +7,7 @@ CC = g++
 COMPILER_FLAGS = -w
 
 # flags por causa do glad, opengl, etc.
-LINKER_FLAGS = -Iinclude
+LINKER_FLAGS = -Iinclude -lSDL2
 
 # Arquivo de saida
 OBJ_NAME = main.out
