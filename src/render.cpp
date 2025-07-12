@@ -58,3 +58,14 @@ void Render::drawLine(Point *p1, Point *p2, std::vector<int> color)
     SDL_SetRenderDrawColor(render, color.at(0), color.at(1), color.at(2), 0xFF);
     SDL_RenderDrawLine(render, p1->x, p1->y, p2->x, p2->y);
 }
+
+void Render::drawCircle(Point *p, double r, std::vector<int> color)
+{
+    double fat = 180;
+    for (int i = 0; i < fat; i++)
+    {
+        SDL_SetRenderDrawColor(render, color.at(0), color.at(1), color.at(2), 0xFF);
+        SDL_RenderDrawPoint(render, r * cos(((double)i / fat) * 2 * M_PI) + p->x,
+                            r * sin(((double)i / fat) * 2 * M_PI) + p->y);
+    } // for i<fat
+}

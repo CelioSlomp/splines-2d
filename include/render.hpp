@@ -18,4 +18,5 @@ public:
     SDL_Window *getWindow();
     void drawPoint(Point *p, std::vector<int> color);
     void drawLine(Point *p1, Point *p2, std::vector<int> color);
+    void drawCircle(Point *p1, double r, std::vector<int> color);
 };

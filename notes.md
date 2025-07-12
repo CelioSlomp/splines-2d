@@ -20,6 +20,59 @@ This method is expensive. There are other ways to do that, like Catmull-Rom, uni
 
 ---
 
+### Catmull-Rom
+
+$$
+P(t) = \frac{1}{2}\cdot[1, t,t^2, t^3]\cdot \begin{bmatrix} 0&2 &0 &0 \\ -1& 0 &1 &0 \\ 2&-5  &4 &-1\\ -1&3  &-3 &1 \end{bmatrix}\cdot \begin{bmatrix} P_0\\P_1 \\P_2 \\P_3\end{bmatrix}
+$$
+
+
+---
+
+### Cubic Spline
+
+Has a $C^2$ continuity.
+
+So we have that:
+* $a = t_0 < t_1 < \dots < t_N = b$;
+* $S''_i(x) = \alpha x + \beta$.
+
+We denote that $S''_i(t_i) = z_i$ and $S''_i(t_{i+1}) = z_{i+1}$:
+$$
+S''_i(t_i) = z_i = \alpha t_i + \beta
+$$
+$$
+S''_i(t_{i+1}) = z_{i+1} = \alpha t_{i+1} + \beta
+$$
+Applying $S''_i(t_{i+1}) - S''_i(t_i)$, we get:
+
+
+* $h_i = t_{i+1} - t_i$;
+* $\alpha = \frac{z_{i+1} - z_i}{h_i}$;
+* $\beta = \frac{z_{i}t_{i+1} - z_{i+1}t_i}{h_i}$.
+
+Going back to $S''_i(x)$:
+$$
+S''_i(x) = \frac{z_i}{h_i}(t_{i+1} - x) + \frac{z_{i+1}}{h_i}(x-t_i).
+$$ 
+Integrating:
+$$
+S'_i(x) = -\frac{z_i}{2h_i}(t_{i+1} - x)^2 + \frac{z_{i+1}}{2h_i}(x-t_i)^2 + p.
+$$ 
+Integrating one more time:
+$$
+S_i(x) = -\frac{z_i}{6h_i}(t_{i+1} - x)^3 + \frac{z_{i+1}}{6h_i}(x-t_i)^3 + px + q.
+$$
+We will change $p$ and $q$ by $C$ and $D$:
+$$
+S_i(x) = -\frac{z_i}{6h_i}(t_{i+1} - x)^3 + \frac{z_{i+1}}{6h_i}(x-t_i)^3 + C(x-t_i) + D(t_{i+1}-x).
+$$
+
+
+
+
+---
+
 ### Continuity
 
 Lerp can't go to every point of the line, so we have to add some control points that will make sure the line will go through the joins.
