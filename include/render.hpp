@@ -1,7 +1,7 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_opengl.h>
-#include <point.hpp>
+#include <spline.hpp>
 #include <vector>
 
 class Render

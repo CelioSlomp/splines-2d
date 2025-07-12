@@ -1,8 +1,5 @@
 # The Continuity of Splines
 
-* Link: https://www.youtube.com/watch?v=jvPPXbo87ds
-
----
 
 The project aims to develop a map for a follow line robot group of Instituto Federal Catarinense - Campus Blumenau. So, I need to use splines to determine the curves of the path.
 
@@ -67,8 +64,36 @@ We will change $p$ and $q$ by $C$ and $D$:
 $$
 S_i(x) = -\frac{z_i}{6h_i}(t_{i+1} - x)^3 + \frac{z_{i+1}}{6h_i}(x-t_i)^3 + C(x-t_i) + D(t_{i+1}-x).
 $$
+With $S_i(t_i) =y_i$ and $S_i(t_{i+1}) = y_{i+1}$, we get:
+$$
+C = \frac{y_{i+1}}{h_i} - \frac{z_{i+1}h_i}{6} \text{ and } D = \frac{y_{i}}{h_i} - \frac{z_{i}h_i}{6}
+$$
+Using $C$ and $D$, we have:
+$$
+S_i(x) = -\frac{z_i}{6h_i}(t_{i+1} - x)^3 + \frac{z_{i+1}}{6h_i}(x-t_i)^3 + \left(\frac{y_{i+1}}{h_i} - \frac{z_{i+1}h_i}{6}\right)(x-t_i) + \left(\frac{y_i}{h_i} - \frac{z_ih_i}{6}\right)(t_{i+1}-x)
+$$
+And then we have to derivate the equation:
+$$
+S'_i(x) = -\frac{z_i}{2h_i}(t_{i+1} - x)^2 + \frac{z_{i+1}}{2h_i}(x-t_i)^2 + \frac{y_{i+1}}{h_i} - \frac{z_{i+1}h_i}{6} - \frac{y_i}{h_i} + \frac{z_ih_i}{6}
+$$
+For the continuity $C^2$, we have $S'_i(t_{i+1}) = S'_{i+1}(t_{i+1})$ for $ i = 0,1,2,\dots, n-2.$
 
-
+$$
+S'_i(t_{i+1}) = \frac{z_{i+1}h_i}{2} + \frac{y_{i+1}}{h_i} - \frac{z_{i+1}h_i}{6} - \frac{y_i}{h_i} + \frac{z_ih_i}{6} = \frac{z_{i+1}h_i}{3} + \frac{z_ih_i}{6} + \frac{y_{i+1} - y_i}{h_i}.
+$$
+The same for $S'_{i+1}(t_{i+1}):$
+$$
+S'_{i+1}(t_{i+1}) = \frac{z_{i+1}h_{i+1}}{2} + \frac{z_{i+2}h_{i+1}}{6} +\frac{y_{i+2} - y_{i+1}}{h_{i+1}}.
+$$
+After $S'_{i}(t_{i+1}) = S'_{i+1}(t_{i+1})$, we get:
+$$
+z_ih_i + 2z_{i+1}h_i + 3z_{i+1}h_{i+1} - z{i+2}h_{i+1} = 6\left(\frac{y_{i+2}-y_{i+1}}{h_{i+1}} - \frac{y_{i+1}-y_i}{h_i} \right)
+$$
+With the linear system $ a_iz_{i-1} + b_iz_i + c_iz_{i+1} = d_i$:
+* $a_i = h_{i-1}$
+* $b_i = 2(h_{i-1} + h_i)$
+* $c_i = h_i$
+* $d_i = 6\left(\frac{y_{i+1}-y_{i}}{h_{i}} - \frac{y_{i}-y_i}{h_{i-1}} \right)$
 
 
 ---
@@ -88,3 +113,10 @@ then, deriving the $[matrix 1x4]$, we have the velocity, acceleration and then t
 ---
 
 It will probably be enough until the minute 40 of the video. I'm going to implement something for that.
+
+---
+
+References
+
+* https://cse.engineering.nyu.edu/~mleung/CS3734/s03/ch07/cubicSpline.pdf
+* https://www.youtube.com/watch?v=jvPPXbo87ds
