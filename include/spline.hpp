@@ -8,12 +8,13 @@ public:
     double r;
     std::vector<Point> points;
     std::vector<Point> cPoints;
-    std::vector<double> h, a, b, c, d;
+    std::vector<double> h, a, b, c, d, z;
     Spline(std::vector<Point> &points, double r);
     Point bezierPoint(Point p1, Point p2, Point p3, Point p4, double t);
     Point catmullRom(Point p1, Point p2, Point p3, Point p4, double t);
     Point cubicNatural(double t);
     void fillH();
-    std::vector<double> solveTridiagonal();
+    void solveTridiagonal();
     void createSystem();
+    double evaluateSpline(double x, int i);
 };
