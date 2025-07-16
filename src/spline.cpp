@@ -6,7 +6,6 @@ Spline::Spline(std::vector<Point> &points, double r)
     this->points = points;
     this->cPoints = cPoints;
     this->r = r;
-    std::vector<double> z;
 }
 
 Point Spline::bezierPoint(Point p1, Point p2, Point p3, Point p4, double t)
@@ -25,12 +24,6 @@ void Spline::fillH()
     int n = points.size();
     for (int i = 0; i < n - 1; ++i)
         h.push_back(points[i + 1].x - points[i].x);
-}
-
-Point Spline::cubicNatural(double t)
-{
-    if (!h.size())
-        fillH();
 }
 
 void Spline::solveTridiagonal()

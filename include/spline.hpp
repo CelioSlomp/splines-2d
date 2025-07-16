@@ -12,9 +12,8 @@ public:
     Spline(std::vector<Point> &points, double r);
     Point bezierPoint(Point p1, Point p2, Point p3, Point p4, double t);
     Point catmullRom(Point p1, Point p2, Point p3, Point p4, double t);
-    Point cubicNatural(double t);
     void fillH();
     void solveTridiagonal();
     void createSystem();
-    double evaluateSpline(double x, int i);
+    double evaluateSpline(double t, int i);
 };

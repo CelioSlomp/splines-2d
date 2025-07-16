@@ -24,29 +24,14 @@ Point calcPoint(Point p1, Point p2, double t)
 
 void loop()
 {
-    double t;
-    Spline spl = Spline(points, 10.0);
-    // Spline3d spl3d = Spline3d(points, 10.0);
-
+    mainWindow.drawLine(&pA, &pB, blackColor);
+    mainWindow.drawLine(&pB, &pC, blackColor);
+    mainWindow.drawLine(&pC, &pD, blackColor);
+    mainWindow.drawLine(&pD, &pE, blackColor);
+    mainWindow.drawLine(&pE, &pF, blackColor);
+    mainWindow.drawLine(&pF, &pG, blackColor);
     for (int i = 0; i < points.size(); i++)
-    {
         mainWindow.drawCircle(&points[i], 5, blackColor);
-    }
-
-    spl.createSystem();
-    spl.solveTridiagonal();
-
-    int n = points.size();
-    Point pN;
-    for (int i = 0; i < n - 1; i++)
-    {
-        for (double t = points[i].x; t <= points[i + 1].x; t += 0.1)
-        {
-            double y = spl.evaluateSpline(t, i);
-            pN = Point(t, y, 0);
-            mainWindow.drawPoint(&pN, blackColor);
-        }
-    }
 }
 
 int main()
